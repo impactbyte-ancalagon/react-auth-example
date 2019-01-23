@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Redirect } from 'react-router-dom'
-import './App.css'
 
 import Home from './pages/Home'
 import UserList from './pages/UserList'
