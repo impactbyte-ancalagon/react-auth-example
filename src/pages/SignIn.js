@@ -26,7 +26,7 @@ export default class SignIn extends Component {
 
     if (data.token) {
       this.setState({ email: '', password: '', success: true })
-      this.props.updateAuthStatus(true)
+      this.props.signIn()
       Cookies.set('token', data.token, { expires: 7 })
     }
   }

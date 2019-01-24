@@ -25,7 +25,7 @@ class App extends Component {
           path="/users"
           render={props =>
             isAuthenticated ? (
-              <UserList {...props} />
+              <UserList {...props} signOut={() => this.updateAuthStatus(false)} />
             ) : (
               <Redirect
                 to={{ pathname: '/signin', state: { from: props.location } }}
@@ -47,7 +47,7 @@ class App extends Component {
           path="/signin"
           render={props =>
             !isAuthenticated ? (
-              <SignIn {...props} updateAuthStatus={this.updateAuthStatus} />
+              <SignIn {...props} signIn={() => this.updateAuthStatus(true)} />
             ) : (
               <Redirect to={{ pathname: '/users' }} />
             )

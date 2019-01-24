@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Cookies from 'js-cookie'
 import Axios from 'axios'
 
@@ -19,11 +19,19 @@ export default class UserList extends Component {
     this.setState({ users })
   }
 
+  handleClick = e => {
+    Cookies.remove('token')
+    this.props.signOut()
+  }
+
   render() {
     const { users } = this.state
 
     return (
-      <ul>{users && users.map((user, i) => <li key={i}>{user.name}</li>)}</ul>
+      <Fragment>
+        <ul>{users && users.map((user, i) => <li key={i}>{user.name}</li>)}</ul>
+        <button onClick={this.handleClick}>Sign Out</button>
+      </Fragment>
     )
   }
 }
