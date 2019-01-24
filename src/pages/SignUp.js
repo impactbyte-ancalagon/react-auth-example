@@ -19,22 +19,17 @@ export default class SignUp extends Component {
   handleSubmit = async e => {
     e.preventDefault()
 
-    const { name, age, email, password, confirmPassword } = this.state
+    const { password, confirmPassword } = this.state
 
     if (password !== confirmPassword) {
       alert('Password do not match!')
     } else {
       const response = await Axios.post(
         'http://localhost:8000/api/auth/signup',
-        {
-          name,
-          age,
-          email,
-          password
-        }
+        this.state
       )
 
-      if (response === 'Success') {
+      if (response.status === 200) {
         this.setState({
           name: '',
           age: 0,
@@ -51,7 +46,7 @@ export default class SignUp extends Component {
     const { name, age, email, password, confirmPassword, success } = this.state
 
     if (success) {
-      return <Redirect to={{ pathname: '/signin' }} />
+      return <Redirect to="/signin" />
     }
 
     return (

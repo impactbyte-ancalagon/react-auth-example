@@ -25,22 +25,19 @@ class App extends Component {
           path="/users"
           render={props =>
             isAuthenticated ? (
-              <UserList {...props} signOut={() => this.updateAuthStatus(false)} />
-            ) : (
-              <Redirect
-                to={{ pathname: '/signin', state: { from: props.location } }}
+              <UserList
+                {...props}
+                signOut={() => this.updateAuthStatus(false)}
               />
+            ) : (
+              <Redirect to="/signin" />
             )
           }
         />
         <Route
           path="/signup"
           render={props =>
-            !isAuthenticated ? (
-              <SignUp {...props} />
-            ) : (
-              <Redirect to={{ pathname: '/users' }} />
-            )
+            !isAuthenticated ? <SignUp {...props} /> : <Redirect to="/users" />
           }
         />
         <Route
@@ -49,7 +46,7 @@ class App extends Component {
             !isAuthenticated ? (
               <SignIn {...props} signIn={() => this.updateAuthStatus(true)} />
             ) : (
-              <Redirect to={{ pathname: '/users' }} />
+              <Redirect to="/users" />
             )
           }
         />

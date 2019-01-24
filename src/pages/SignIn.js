@@ -17,17 +17,15 @@ export default class SignIn extends Component {
   handleSubmit = async e => {
     e.preventDefault()
 
-    const { email, password } = this.state
+    const response = await Axios.post(
+      'http://localhost:8000/api/auth/signin',
+      this.state
+    )
 
-    const { data } = await Axios.post('http://localhost:8000/api/auth/signin', {
-      email,
-      password
-    })
-
-    if (data.token) {
+    if (response.status === 200) {
+      Cookies.set('token', response.data.token, { expires: 7 })
       this.setState({ email: '', password: '', success: true })
       this.props.signIn()
-      Cookies.set('token', data.token, { expires: 7 })
     }
   }
 
@@ -35,7 +33,7 @@ export default class SignIn extends Component {
     const { email, password, success } = this.state
 
     if (success) {
-      return <Redirect to={{ pathname: '/users' }} />
+      return <Redirect to="/users" />
     }
 
     return (
