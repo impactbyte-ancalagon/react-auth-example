@@ -25,7 +25,7 @@ export default class SignUp extends Component {
       alert('Password do not match!')
     } else {
       const response = await Axios.post(
-        'http://localhost:8000/api/auth/signup',
+        `${process.env.REACT_APP_API_URL}/api/auth/signup`,
         this.state
       )
 

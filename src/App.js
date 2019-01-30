@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import Axios from 'axios'
 
 import Home from './pages/Home'
 import UserList from './pages/UserList'
@@ -9,6 +10,17 @@ import SignIn from './pages/SignIn'
 class App extends Component {
   state = {
     isAuthenticated: false
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await Axios.get(
+        `${process.env.REACT_APP_API_URL}/api/users`
+      )
+      if (response.status !== 500) {
+        console.log(true)
+      }
+    } catch (err) {}
   }
 
   updateAuthStatus = value => {

@@ -18,7 +18,7 @@ export default class SignIn extends Component {
     e.preventDefault()
 
     const response = await Axios.post(
-      'http://localhost:8000/api/auth/signin',
+      `${process.env.REACT_APP_API_URL}/api/auth/signin`,
       this.state
     )
 

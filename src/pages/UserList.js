@@ -12,7 +12,7 @@ export default class UserList extends Component {
 
     const {
       data: { users }
-    } = await Axios.get('http://localhost:8000/api/users', {
+    } = await Axios.get(`${process.env.REACT_APP_API_URL}/api/users`, {
       headers: { Authorization: `Bearer ${token}` }
     })
 
